@@ -27,10 +27,7 @@ var addNote = (title, body) => {
   if (duplicateNotes.length === 0) {
     notes.push(note);
     savedNotes(notes);
-    console.log(`\nadded note: ${note.title} - ${note.body}`);
     return note;
-  } else {
-    console.log("\ncouldn't save - duplicate body")
   }
 };
 
