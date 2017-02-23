@@ -1,9 +1,30 @@
 console.log('starting notes.js');
 
-// module.exports.age = 30;
+const fs = require('fs');
 
 var addNote = (title, body) => {
-  console.log('Adding note', title," - ", body); 
+  var notes = [];
+  var note = {
+    title,
+    body
+  };
+
+  try {
+    var notesString = fs.readFileSync('notes-data.json');
+    notes = JSON.parse(notesString);
+  } catch (e) {
+    // if try works then catch won't run, if try fails then catch runs
+    
+  };
+
+  var duplicateNotes = notes.filter((note) => note.title === title);
+
+  if (duplicateNotes.length === 0) {
+    notes.push(note);
+    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+  } else {
+    console.log("couldn't save - duplicate body")
+  }
 };
 
 var getAll = () => {
