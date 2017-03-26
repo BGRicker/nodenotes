@@ -21,7 +21,9 @@ if (command === 'add') {
     console.log("Title already taken");
   };
 } else if (command === 'list') {
-  notes.getAll();
+  var allNotes = notes.getAll();
+  console.log(`Printing ${allNotes.length} notes(s)`);
+  allNotes.forEach((note) => notes.logNote(note));
 } else if (command === 'read') {
   note = notes.getNote(argv.title);
   if (note) {
