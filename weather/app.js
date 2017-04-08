@@ -20,13 +20,13 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
   if (errorMessage) {
     console.log(errorMessage);
   } else {
-    console.log(JSON.stringify(results, undefined, 2));
+    console.log(results.address);
+    weather.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => {
+      if (errorMessage) {
+        console.log(errorMessage);
+      } else {
+        console.log(` - It's ${weatherResults.temperature} degrees, feels like ${weatherResults.apparentTemperature} degrees`);
+      }
+    });
   }
-});
-
-
-var encodedAddress = encodeURIComponent(argv.address);
-
-weather.getWeather(42.3514653,-71.0601767, (errorMessage, weatherResults) => {
-  console.log(JSON.stringify(weatherResults, undefined, 2)); // undefined for filtering
 });
