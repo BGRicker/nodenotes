@@ -1,15 +1,18 @@
 const request = require('request');
 
-var getWeather = () => {
+var getWeather = (lat, long, callback) => {
   request({
-    // url: `https://api.darksky.net/forecast/dcbdb3b43d97ccfc1eb6379f3b97c9b0/${lat},${long}`,
-    url: `https://api.darksky.net/forecast/dcbdb3b43d97ccfc1eb6379f3b97c9b0/37.8267,-122.4233`,
+    url: `https://api.darksky.net/forecast/dcbdb3b43d97ccfc1eb6379f3b97c9b0/${lat},${long}`,
+   // url: `https://api.darksky.net/forecast/dcbdb3b43d97ccfc1eb6379f3b97c9b0/37.8267,-122.4233`,
     json: true
   }, (error, response, body) => {
     if (!error && response.statusCode === 200) {
-      console.log(body.currently.temperature);
+      callback(undefined, {
+        temperature: body.currently.temperature,
+        apparentTemperature: body.currently.apparentTemperature
+      });
     } else {
-      console.log("Unable to fetch weather");
+      callback("Unable to fetch weather");
     };
   });
 };

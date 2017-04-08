@@ -27,4 +27,6 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
 
 var encodedAddress = encodeURIComponent(argv.address);
 
-weather.getWeather();
+weather.getWeather(42.3514653,-71.0601767, (errorMessage, weatherResults) => {
+  console.log(JSON.stringify(weatherResults, undefined, 2)); // undefined for filtering
+});
